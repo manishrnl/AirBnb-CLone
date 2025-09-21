@@ -22,10 +22,10 @@ public class Hotel {
     private String city;
 
     @Column(columnDefinition = "TEXT[]")
-    private String[] photos;
+    private String photos;
 
     @Column(columnDefinition = "TEXT[]")
-    private String[] amenities;
+    private String amenities;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

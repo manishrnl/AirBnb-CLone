@@ -10,15 +10,15 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-
+@Table(name = "guest")
 public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "users_id", nullable = false)
+    private Users users;
 
     private String name;
 

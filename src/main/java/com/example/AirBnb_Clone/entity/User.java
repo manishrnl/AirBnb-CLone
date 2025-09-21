@@ -1,27 +1,31 @@
 package com.example.AirBnb_Clone.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.w3c.dom.stylesheets.LinkStyle;
 
-import java.util.List;
+import javax.management.relation.Role;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-
+@Table(name = "app_user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private List<String> roles;
-    private String name;
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
 
+    private String name;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 }

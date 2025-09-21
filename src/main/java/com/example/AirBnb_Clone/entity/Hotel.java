@@ -16,17 +16,16 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String city;
-    private String photos;
-
-    @ManyToOne
-    @JoinColumn()
-    private Hotel hotel;
-
+    @Column(nullable = false)
     private String name;
 
-    @OneToOne
-    private ContactInfo contactInfo;
+    private String city;
+
+    @Column(columnDefinition = "TEXT[]")
+    private String[] photos;
+
+    @Column(columnDefinition = "TEXT[]")
+    private String[] amenities;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -34,6 +33,10 @@ public class Hotel {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    private String amenities;
+    @Embedded
+    private HotelContactInfo contactInfo;
+
+    @Column(nullable = false)
     private Boolean active;
+
 }

@@ -1,8 +1,6 @@
 package com.example.AirBnb_Clone.entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,29 +12,39 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-
 public class Room {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long hotelId;
-    private String type;
     @ManyToOne
+    @JoinColumn(name = "hotel_id", nullable = false)
     private Hotel hotel;
 
+    @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal basePrice;
 
+    @Column(columnDefinition = "TEXT[]")
+    private String[] photos;
+
+    @Column(columnDefinition = "TEXT[]")
+    private String[] amenities;
+
+    @Column(nullable = false)
+    private Integer totalCount;
+
+    @Column(nullable = false)
+    private Integer capacity;
+
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-    private String amenities;
 
-    private String photos;
-    @NotNull
-    private Integer totalCount;
-    @NotNull
-    private Integer capacity;
 }
